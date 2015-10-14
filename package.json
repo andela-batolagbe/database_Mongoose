@@ -1,0 +1,16 @@
+{
+  "name": "database_Mongoose",
+  "version": "0.0.0",
+  "repository": "https:github.com/andela-batolagbe/database_Mongoose.git",
+  "scripts": {
+    "start": "node src/documentManager.js",
+    "test": "jasmine-node spec/documentManagerSpec.js --captureExceptions --forceexit"
+  },
+  "dependencies": {
+    "jasmine-as-promised": "0.0.8",
+    "jasmine-node": "latest",
+    "mongodb": "latest",
+    "mongoose": "latest",
+    "q": "^1.4.1"
+  }
+}
