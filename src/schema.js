@@ -1,6 +1,8 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
+
+//user schema
 var User = new Schema({
 
   firstname: {
@@ -25,6 +27,7 @@ var User = new Schema({
   }
 });
 
+//role schema
 var Role = new Schema({
 
   title: {
@@ -37,6 +40,8 @@ var Role = new Schema({
   }
 });
 
+
+//document schema
 var Document = new Schema({
 
   contents: {
@@ -63,22 +68,7 @@ var Document = new Schema({
 
 });
 
-// User.pre('save', function(next, first, last, done) {
-//   this.constructor.find({
-//     firstname: first,
-//     lastname: last
-//   }).then(function(user) {
-//     if (user && user !== [] && user !== {}) {
-//       var err = new Error({
-//         message: 'user already exists'
-//       });
-//       next(err);
-//     } else {
-//       done();
-//     }
-//   });
-// });
-
+// export models
 module.exports = {
 
   User: mongoose.model('User', User),

@@ -3,12 +3,20 @@ mongoose.Promise = require('q').Promise;
 
 var models = require('./schema');
 
+//database definition
 var db = 'mongodb://localhost:checkpoint_db';
 
 mongoose.connect(db);
 
+//export methods
 module.exports = {
 
+  /**
+   * [findOneUser find a single user]
+   * @param  {string} first [user's firstname]
+   * @param  {string} last  [user's lastname]
+   * @return {JSON}       [user details]
+   */
   findOneUser: function(first, last) {
     return models.User.findOne({
       firstname: first,
@@ -17,11 +25,25 @@ module.exports = {
 
   },
 
+  /**
+   * [findRole find a single role]
+   * @param  {string} first [role title]
+   * @return {JSON}       [role details]
+   */
+
   findRole: function(role) {
     return models.Role.findOne({
       title: role
     });
   },
+
+  /**
+   * [createUser add a new user]
+   * @param  {string} first [user's firstname]
+   * @param  {string} last  [user's lastname]
+   * @param  {string} role  [user's role]
+   * @return {string}       [status message]
+   */
 
   createUser: function(first, last, role) {
 
@@ -77,6 +99,13 @@ module.exports = {
     }
   },
 
+
+  /**
+   * [createDocument add a new document]
+   * @param  {string} content  [document's content]
+   * @param  {string} permittedRole  [role that can access it]
+   * @return {string}       [status message]
+   */
   createDocument: function(content, permittedRole) {
 
     /**
@@ -122,6 +151,11 @@ module.exports = {
       });
   },
 
+  /**
+   * [createRole add a new role]
+   * @param  {string} roleTitle  [role title]
+   * @return {string}       [status message]
+   */
   createRole: function(roleTitle) {
 
     var roleInfo = {
@@ -140,6 +174,11 @@ module.exports = {
 
   },
 
+  /**
+   * [getAllUsers get all users in database]
+   * @return {JSON}       [users' details]
+   */
+
   getAllUsers: function() {
 
     return models.User.find({}).sort({
@@ -149,6 +188,12 @@ module.exports = {
 
   },
 
+  /**
+   * [getAllDocuments get all documents in database]
+   * @param  {number} limit [max number of documents 
+   * to be returned]
+   * @return {JSON}       [document's details]
+   */
   getAllDocuments: function(limit) {
 
     return models.Document
@@ -161,6 +206,13 @@ module.exports = {
       .populate('permission');
   },
 
+  /**
+   * [getAllDocumentsByDate get all documents in database by date]
+   * @param  {number} limit [max number of documents 
+   * to be returned]
+   * @param  {date} date [date created]
+   * @return {JSON}       [document's details]
+   */
   getAllDocumentsByDate: function(date, limit) {
 
     var createDate = date;
@@ -181,6 +233,15 @@ module.exports = {
       .populate('permission');
   },
 
+  /**
+   * [getAllDocumentsByRole get all documents in database by 
+   * role permitted]
+   * @param  {number} limit [max number of documents 
+   * to be returned]
+   * @param  {string} role [role that can access it]
+   * @return {JSON}       [document's details]
+   */
+
   getAllDocumentsByRole: function(role, limit) {
 
     return models.Role.find({
@@ -200,15 +261,24 @@ module.exports = {
           .populate('permission');
       });
   },
+
+  /**
+   * [getAllRoles get all roles in database]
+   * @return {JSON}       [role details]
+   */
   getAllRoles: function() {
 
     return models.Role.find({})
-    .sort({
+      .sort({
         title: 'ascending'
       });
 
   },
 
+  /**
+   * [removeUsers delete all users]
+   * @return {string} [success message]
+   */
   removeUsers: function() {
     models.User.find({}).remove(function(err) {
 
@@ -222,6 +292,10 @@ module.exports = {
 
   },
 
+  /**
+   * [removeUsers delete all documents]
+   * @return {string} [success message]
+   */
   removeDocuments: function() {
     models.Document.find({}).remove(function(err) {
 
@@ -235,6 +309,10 @@ module.exports = {
 
   },
 
+  /**
+   * [removeUsers delete all roles]
+   * @return {string} [success message]
+   */
   removeRoles: function() {
     models.Role.find({}).remove(function(err) {
 

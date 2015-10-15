@@ -1,11 +1,14 @@
 var fs = require('fs');
-//require("jasmine-as-promised")();
+
 var documentManager = require('../src/documentManager');
 var models = require('../src/schema');
+
+//load fixtures
 var data = fs.readFileSync(__dirname + '/fixtures.json');
 
 var testData = JSON.parse(data);
 
+//users collection test
 describe('User', function() {
 
   var users = testData[0].Users;
@@ -122,6 +125,7 @@ describe('User', function() {
 
 });
 
+//roles collection test
 describe('Role', function() {
 
   var roles = testData[0].Roles;
@@ -179,6 +183,7 @@ describe('Role', function() {
 
 });
 
+//document collection test
 describe('Document', function() {
 
   var documents = testData[0].Documents;
@@ -194,7 +199,7 @@ describe('Document', function() {
     runs(function() {
       for (var doc in documents) {
         documentManager
-        .createDocument(documents[doc].contents, documents[doc].permitted);
+          .createDocument(documents[doc].contents, documents[doc].permitted);
       }
     });
 
@@ -265,6 +270,7 @@ describe('Document', function() {
   });
 });
 
+//document search test
 describe('Search', function() {
 
 
