@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "repository": "https:github.com/andela-batolagbe/database_Mongoose.git",
   "scripts": {
-    "start": "node src/documentManager.js",
+    "start": "node ./src/openTerminal.js",
     "test": "jasmine-node spec/documentManagerSpec.js --captureExceptions --forceexit"
   },
   "dependencies": {
